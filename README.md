@@ -4,4 +4,4 @@
 Pertama kali, jalankan crawler.py
 
 ##Menampilkan Hasil
-Buka file distro.html, kemudian silahkan lakukan search.
+Buka file index.html, kemudian silahkan lakukan search.
