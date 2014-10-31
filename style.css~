@@ -1,0 +1,87 @@
+@import url(http://fonts.googleapis.com/css?family=Oswald);
+@import url(http://fonts.googleapis.com/css?family=Poiret+One);
+@import url(http://fonts.googleapis.com/css?family=Lobster);
+
+body{
+font-family: 'Roboto Condensed', sans-serif;
+background-color: #2f2f3f
+}
+
+h1,h2,h3,h4{
+font-family: "Oswald", Helvetica, Arial, sans-serif;
+}
+
+.hippyhead{
+font-family: 'Lobster', cursive;
+}
+
+.navbar{
+background-color: #222;
+color: white;
+margin: -20px -8px;
+padding: 10px;
+height: 100px;
+}
+
+.navbar div{
+display: inline-block;
+}
+
+.navbarsearch{
+position: absolute;
+right: 20px;
+top: 50px;
+}
+
+.navbarsearch input{
+width: 300px;
+height: 40px;
+padding-left: 5px;
+padding-right: 5px;
+margin-top: -15px;
+}
+
+.headtitle{
+margin-top: 25px;
+line-height: 50px;
+font-size: 50px;
+}
+
+.content{
+width: 70%;
+margin: 20px auto;
+background-color: #dddddf;
+padding: 20px 10px;
+}
+
+.items{
+background-color: white;
+display: inline-block;
+width: 22%;
+margin: 5px;
+padding: 5px;
+}
+
+.itemhead{
+background-color: #2f2f3f;
+width:100%;
+height:10px;
+margin: 0px;
+}
+
+.prdkimage{
+max-width: 100%;
+}
+
+.tombolbeli{
+text-decoration:none;
+font-size:18px;
+color: white;
+background-color: #000055;
+display: inline-block;
+padding: 3px 8px;
+}
+
+.tombolbeli:hover{
+background-color: #333388;
+}

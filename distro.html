@@ -1,0 +1,63 @@
+<html>
+	<head>
+	<title>Distro Crawler</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	
+	<body>
+	<div class="navbar">
+		<div class="navbartitle">
+			<h3 class="headtitle">DISTRO CRAWLER</h3>
+		</div>
+		<div class="navbarsearch">
+			<input type="text" placeholder="cari di sini" id="searchbar">
+		</div>
+	</div>
+	<div class="content">
+		<h1 class="hippyhead">Available Items</h1>
+		<div id="itemlist">
+		</div>
+	</div>
+	
+
+	</body>
+	<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+	<script type="text/javascript">
+	
+	var data = [];	
+	
+	$.getJSON("data.json", function(json) {
+	    	data = json;
+		var inner = "";
+		for (key in data){
+			inner = inner + 
+			"<div class='items'><div class='itemhead'></div><div class='produkimg'><img src='" +data[key][5]+ "' class='prdkimage'></div><div class='produkdata'><h4>"+data[key][3]+" - "+data[key][0]+"</h4><p><span class='kategori'>Kategori: "+data[key][1]+"</span><br><span class='harga'>"+data[key][2]+"</span></p></div><a class='tombolbeli hippyhead' href='"+data[key][4]+"' target='_blank'> Beli! </a></div>";
+		}
+		$("#itemlist").html(inner);
+	});
+
+	$("#searchbar").change(function(){
+		var val = $("#searchbar").val().toLowerCase();
+		var filtered = [];
+		var inner = "";
+		for (key in data){
+			if ((data[key][0] && data[key][0].toLowerCase().search(val) != -1) || data[key][1].toLowerCase().search(val) != -1 || data[key][2].toLowerCase().search(val) != -1 || data[key][3].toLowerCase().search(val) != -1 || data[key][4].toLowerCase().search(val) != -1 || data[key][5].toLowerCase().search(val) != -1 ) {
+				filtered.push(data[key]);
+			}
+		}
+		$("#itemlist").html("");
+		if (filtered.length > 0){
+			for (key in filtered){
+				inner = inner + 
+				"<div class='items'><div class='itemhead'></div><div class='produkimg'><img src='" +filtered[key][5]+ "' class='prdkimage'></div><div class='produkdata'><h4>"+filtered[key][3]+" - "+filtered[key][0]+"</h4><p><span class='kategori'>Kategori: "+filtered[key][1]+"</span><br><span class='harga'>"+filtered[key][2]+"</span></p></div><a class='tombolbeli hippyhead' href='"+filtered[key][4]+"' target='_blank'> Beli! </a></div>";
+			}
+			$("#itemlist").html(inner);
+		} else {
+			$("#itemlist").html("<h4>Maaf, item dengan keterangan \""+val+"\" tidak dapat ditemukan</h4>");
+		}
+		
+	});
+		
+	
+	</script>
+</html>
