@@ -31,7 +31,7 @@
 		var inner = "";
 		for (key in data){
 			inner = inner + 
-			"<div class='items'><div class='itemhead'></div><div class='produkimg'><img src='" +data[key][5]+ "' class='prdkimage'></div><div class='produkdata'><h4>"+data[key][3]+" - "+data[key][0]+"</h4><p><span class='kategori'>Kategori: "+data[key][1]+"</span><br><span class='harga'>"+data[key][2]+"</span></p></div><a class='tombolbeli' href='"+data[key][4]+"' target='_blank'> Beli </a></div>";
+			"<div class='items'><div class='itemhead'></div><div class='produkimg'><img src='" +data[key][5]+ "' class='prdkimage'></div><div class='produkdata'><h4>"+data[key][3]+" - "+data[key][0]+"</h4><p><span class='kategori'>Kategori: "+data[key][1]+"</span><br><span class='harga'>"+data[key][2]+"</span></p></div><a class='tombolbeli hippyhead' href='"+data[key][4]+"' target='_blank'> Beli! </a></div>";
 		}
 		$("#itemlist").html(inner);
 	});
@@ -49,11 +49,11 @@
 		if (filtered.length > 0){
 			for (key in filtered){
 				inner = inner + 
-				"<div class='items'><div class='itemhead'></div><div class='produkimg'><img src='" +filtered[key][5]+ "' class='prdkimage'></div><div class='produkdata'><h4>"+filtered[key][3]+" - "+filtered[key][0]+"</h4><p><span class='kategori'>Kategori: "+filtered[key][1]+"</span><br><span class='harga'>"+filtered[key][2]+"</span></p></div><a class='tombolbeli' href='"+filtered[key][4]+"' target='_blank'> Beli </a></div>";
+				"<div class='items'><div class='itemhead'></div><div class='produkimg'><img src='" +filtered[key][5]+ "' class='prdkimage'></div><div class='produkdata'><h4>"+filtered[key][3]+" - "+filtered[key][0]+"</h4><p><span class='kategori'>Kategori: "+filtered[key][1]+"</span><br><span class='harga'>"+filtered[key][2]+"</span></p></div><a class='tombolbeli hippyhead' href='"+filtered[key][4]+"' target='_blank'> Beli! </a></div>";
 			}
 			$("#itemlist").html(inner);
 		} else {
-			$("#itemlist").html("<h4>Maaf, item dengan keterangan \""+val+"\" tidak dapat ditemukan</h4>");
+			$("#itemlist").html("<h2 class='hippyhead'>Maaf, item dengan keterangan \""+val+"\" tidak dapat ditemukan</h2>");
 		}
 		
 	});
