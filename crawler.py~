@@ -22,6 +22,7 @@ def grabRazor(url,base):
 			if len(row.find_all('td', {"class":"normaltext"})) > 0 :
 				col = row.find_all('table', {"class":"normaltext"})[0]
 				harga = col.find_all('span', {"class":"product-price"})[0].string
+				harga = harga.replace('.','').replace('Rp','IDR')
 			if namaProduk is not None and image is not None and linkProduk is not None and harga is not None :
 				brand = url.split('/')[6]
 				cat = 't-shirt'
@@ -31,6 +32,7 @@ def grabRazor(url,base):
 				if item not in itemList:
 					itemList.append(item)
 
+#grab dari screamous
 def grabScr(url,base,title = None):
 	print 'Fetching ' + url
 
@@ -66,6 +68,35 @@ def grabScr(url,base,title = None):
 			accessedLinks.append(href)			
 			grabScr(href,base,cat)
 
+#grab dari invictus
+def grabInv(url,base):
+	print 'Fetching ' + url
+	html = BS(urllib.urlopen(url).read())
+	grid = html.find_all('div', {"class":"product-list"})[0]
+	divs =  list(grid.children)
+	#print divs
+	for div in divs:
+		if div != u'\n' :
+			cat = url.split('/')[3]
+			cat = cat[0:cat.find('-Distro-Online-Indonesia-Invictus')].replace('-',' ')
+			image = div.find_all('div', {"class":"image"})[0].a.img.get('src')
+			namaProduk = div.find_all('div', {"class":"image"})[0].a.img.get('title')
+			linkProduk = div.find_all('div', {"class":"image"})[0].a.get('href')
+			harga = div.find_all('span', {"class":"price-tax"})[0].string
+			harga = harga[8:len(harga)-1].replace('.','').replace(',','')
+			item = [namaProduk,cat,harga,'Invictus',linkProduk,image]
+			itemList.append(item)
+		
+	#buka next page
+	for anchor in html.find_all('a'):
+		href = anchor.get('href')
+		if href is not None:
+			if href.find('http://') == -1:
+				href = base+href
+			if href.find('-Distro-Online-Indonesia-Invictus') != -1 and href not in accessedLinks and href.find('product_id') == -1 and href.find('-Invictus/') == -1 and ((href.find('page=1') == -1 or len(href) > (href.find('page=1')+9))):
+				accessedLinks.append(href)			
+				grabInv(href,base)
+
 
 print 'Crawling data distro'
 print '============================'
@@ -95,6 +126,22 @@ for anchor in html.find_all('a'):
 		else:
 			accessedLinks.append(anchor.get('href'))
 			grabScr(anchor.get('href'),url)
+
+print '============================'
+print 'Http://invictus.co.id'
+print '============================'
+url = 'http://invictus.co.id/'
+connection = urllib.urlopen(url)
+html = BS(connection.read())
+for anchor in html.find_all('a'):
+	if anchor.get('href') is not None:
+		if anchor.get('href').find('-Distro-Online-Indonesia-Invictus') != -1 and anchor.get('href').find('-Distro-Online-Indonesia-Invictus') == len(anchor.get('href'))-33 and anchor.get('href') not in accessedLinks:
+			if anchor.get('href').find('invictus.co.id') == -1 :
+				accessedLinks.append(url+anchor.get('href'))
+				grabInv(url+anchor.get('href'),url)
+			else:
+				accessedLinks.append(anchor.get('href'))
+				grabInv(anchor.get('href'),url)
 
 
 myjson = json.dumps(itemList)
